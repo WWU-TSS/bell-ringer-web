@@ -106,7 +106,7 @@ cat > /etc/cron.d/bell-ringer <<'EOF'
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-@reboot root start-bell-ringer.sh; start-bell-ringer.sh
+@reboot root start-bell-ringer.sh
 EOF
 echo "restarting web server"
 service apache2 reload
