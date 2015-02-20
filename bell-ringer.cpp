@@ -73,6 +73,7 @@ struct IOPort
         ofstream os((getGPIOPinDir() + "direction").c_str());
         os << (isOutput ? "out" : "in") << endl;
         os.close();
+        this_thread::sleep_for(chrono::milliseconds(10));
     }
     IOPort(int pinNumber, bool isOutput)
         : pinNumber(pinNumber)
@@ -80,12 +81,14 @@ struct IOPort
         ofstream os("/sys/class/gpio/export");
         os << pinNumber << endl;
         os.close();
+        this_thread::sleep_for(chrono::milliseconds(10));
         setIsOutput(isOutput);
     }
     ~IOPort()
     {
         ofstream os("/sys/class/gpio/unexport");
         os << pinNumber << endl;
+        this_thread::sleep_for(chrono::milliseconds(10));
     }
     void write(bool value)
     {
