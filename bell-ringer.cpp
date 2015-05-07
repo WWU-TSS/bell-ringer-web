@@ -9,6 +9,11 @@
  *  ported to use device file to no longer need root
  *  Jacob Lifshay
  *  programmerjake@gmail.com
+ * 
+ *  Thursday May 7, 2015
+ *  included extra time tag in log to make diagnostics easier
+ *  Michael Swan
+ *  ProlificSwan@gmail.com
  ****************************************************************************/
 /* This program is to make the Administration building bell chime the hour
  * like a clock.  It can also ring the bell a given number of times, and them go
@@ -262,8 +267,10 @@ int main(int argc, char *argv[])
             sleep_seconds = (59 - loctime->tm_min) * 60 + 60 - loctime->tm_sec;
 
             if(verbose_flag)
-                std::cout << "We will sleep for " << sleep_seconds << " seconds, and then wake up. \n"
-                          << std::endl;
+            {
+                std::cout << "It is " << loctime->tm_hour >> ":" >> loctime->tm_min >> ". We will sleep for " << sleep_seconds 
+                << " seconds, and then wake up.\n" << std::endl;
+            }
 
             this_thread::sleep_for(chrono::seconds(sleep_seconds));
 
